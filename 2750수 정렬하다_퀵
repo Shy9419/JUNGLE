@@ -1,0 +1,28 @@
+def quic_Sort(a):
+    if len(a) <= 1:
+        return a
+    
+    pivot = a[len(a) // 2]
+    left, right, center = [], [], []
+    
+    for i in a:
+        if i < pivot:
+            left.append(i)
+        elif i > pivot:
+            right.append(i)
+        else:
+            center.append(i)
+            
+    return quic_Sort(left) + center + quic_Sort(right)
+
+if __name__ == '__main__':
+    num = int(input())
+    x = [None] * num
+
+    for i in range(num):
+        x[i] = int(input())
+        
+    quic_Sort(x)
+
+    for i in range(num):
+        print(x[i])
