@@ -1,28 +1,65 @@
-def quic_Sort(a):
-    if len(a) <= 1:
-        return a
+import sys
+import collections
+input = sys.stdin.readline
+#print = sys.stdout.write
+
+def quic_sort(li, left, right):
+    if left >= right:
+        return
     
-    pivot = a[len(a) // 2]
-    left, right, center = [], [], []
+    pivot = li[(left + right)//2]
+    pl = left
+    pr = right
+    print('pivot',pivot, 'left = ',left,'right = ',right)
+    print(f'li[{left}] ~ li[{right}] : ', li)
     
-    for i in a:
-        if i < pivot:
-            left.append(i)
-        elif i > pivot:
-            right.append(i)
-        else:
-            center.append(i)
+    while pl <= pr:
+        while li[pl] < pivot:
+            pl += 1
+            print('pl=',pl)
+        while li[pr] > pivot:
+            pr -= 1
+            print('pr=',pr)
+        if pl <= pr:
+            print( f'pl = {li[pl]}, pr = {li[pr]} as' )
+            li[pl], li[pr] = li[pr], li[pl]
+            print( f'pl = {li[pl]}, pr = {li[pr]} tobe' )
+            pl += 1
+            pr -= 1
+    
+    
+    quic_sort(li, left, pr)
+    quic_sort(li, pl, right)
             
-    return quic_Sort(left) + center + quic_Sort(right)
-
-if __name__ == '__main__':
-    num = int(input())
-    x = [None] * num
-
-    for i in range(num):
-        x[i] = int(input())
         
-    quic_Sort(x)
-
+if __name__ == '__main__':
+    num = int(input().rstrip())
+    li = collections.deque()
+    
     for i in range(num):
-        print(x[i])
+        li.append(int(input().rstrip()))
+    
+    quic_sort(li, 0, num -1)
+    
+    for i in range(num):
+        print(str(li[i])+'\n')
+        
+        
+        # def quic_Sort(a):
+#     if len(a) <= 1:
+#         return a
+    
+#     pivot = a[len(a) // 2]
+#     left, right, center = [], [], []
+    
+#     for i in a:
+#         if i < pivot:
+#             left.append(i)
+#         elif i > pivot:
+#             right.append(i)
+#         else:
+#             center.append(i)
+            
+#     return quic_Sort(left) + center + quic_Sort(right)
+
+# x = [None] * num

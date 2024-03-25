@@ -1,0 +1,34 @@
+import collections
+
+def quick_sort(li, left, right):
+    if left >= right:
+        return
+
+    pivot = li[(left + right) // 2]
+    pl = left
+    pr = right
+
+    while pl <= pr:
+        while li[pl] < pivot:
+            pl += 1
+        while li[pr] > pivot:
+            pr -= 1
+        if pl <= pr:
+            li[pl], li[pr] = li[pr], li[pl]
+            pl += 1
+            pr -= 1
+
+    quick_sort(li, left, pr)
+    quick_sort(li, pl, right)
+
+if __name__ == '__main__':
+    num = int(input().rstrip())
+    li = []
+
+    for i in range(num):
+        li.append(int(input().rstrip()))
+
+    quick_sort(li, 0, num - 1)
+
+    for i in range(num):
+        print(str(li[i]) + '\n')
