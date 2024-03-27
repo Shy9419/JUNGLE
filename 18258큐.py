@@ -18,19 +18,25 @@ class Que:
 
     def deque(self):
         x = self.que[self.front]
+        if x is None: return -1
+        self.que[self.front] = None
         self.front += 1
         self.no -= 1
         if self.front == self.capacity:
             self.front = 0
-        return
+        return x
+        
 
-    def count(self, value):
-        c = 0
-        for i in range(self.no):
-            idx = (i + self.front) % self.capacity
-            if self.que[idx] == value:
-                c += 1
-        return c
+
+    def size(self):
+        return self.no
+    # def count(self, value):
+    #     c = 0
+    #     for i in range(self.no):
+    #         idx = (i + self.front) % self.capacity
+    #         if self.que[idx] == value:
+    #             c += 1
+    #     return c
 
     def is_empty(self):
         return self.no <= 0
@@ -51,10 +57,12 @@ class Que:
         if self.is_empty():
             return -1
         else:
-            return self.que[self.rear]
+            last_index = (self.rear - 1 + self.capacity) % self.capacity
+            return self.que[last_index]
 
 
 n = int(sys.stdin.readline())
+print = sys.stdout.write
 
 que = Que(n)
 
@@ -63,11 +71,13 @@ for i in range(n):
 
     if s[0] == "push":
         que.enque(s[1])
+    elif s[0] == "pop":
+        print(str(que.deque())+'\n')
     elif s[0] == "front":
-        print(que.fornt())
+        print(str(que.fornt())+'\n')
     elif s[0] == "back":
-        print(que.back())
+        print(str(que.back())+'\n')
     elif s[0] == "size":
-        print(que.count())
+        print(str(que.size())+'\n')
     elif s[0] == "empty":
-        print(que.empty())
+        print(str(que.empty())+'\n')
