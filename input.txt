@@ -1,16 +1,14 @@
-15
-push 1
-push 2
-front
-back
-size
-empty
-pop
-pop
-pop
-size
-empty
-pop
-push 3
-empty
-front
+13
+0
+1
+2
+0
+0
+3
+2
+1
+0
+0
+0
+0
+0

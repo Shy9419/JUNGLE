@@ -11,3 +11,7 @@ def add_one(n):
 result2=list(map(add_one,myList))
 
 print(result2)
+
+A,B = map(int, input().split())
+print(A+B, A-B, A*B, A//B, A%B, sep='\n')
+
