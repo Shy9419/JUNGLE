@@ -4,6 +4,3 @@ for i in range(1,10):   # for문을 사용. 'i'라는 변수에 iterable 자료�
     print(n, '*', i, '=', n*i)      # 구구단의 형식으로 출력
     
 n = int(input())
-
-for i in range(1, 10):
-    
