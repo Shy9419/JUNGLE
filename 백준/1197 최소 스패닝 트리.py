@@ -1,1 +1,69 @@
-#간선의 개수가 n-1인 연결 트리가 될 때까지 간선을 하나씩 제거
+# #간선의 개수가 n-1인 연결 트리가 될 때까지 간선을 하나씩 제거
+# import sys, heapq
+
+# V, E = map(int, sys.stdin.readline().strip().split())       # 첫 번째 줄에서 정점의 수 V 와 간선의 수 E 를 입력 받는다.
+
+# arr = [[] for _ in range(V)]                                # 각 정점의 인접 리스트를 저장할 리스트 arr을 초기화 합니다.
+# for _ in range(E):                                          # 입력된 간선의 수 만큼 반복합니다.
+#     v1, v2, d = map(int, sys.stdin.readline().strip().split())      # 간선의 정보를 입력 받습니다. 여기서 'v1'과 'v2'는
+#                                                                     # 간선이 연결하는 두 정점이고, 'd'는 간선의 가중치입니다.
+#     arr[v1-1].append([v2-1, d])                                     # 'V1'과 'v2'를 연결하는 간선의 정보를 'v1'의 인접 리스트
+#                                                                     # 에 추가합니다. 이때 가중치 'd'와 연결된 정점 'v2'를 함꼐
+#                                                                     # 저장합니다.
+#     arr[v2-1].append([v1-1, d])
+
+# ### Prim
+# que, dist, cnt = [], 0, 0
+# vi = [False for _ in range(V)]
+# heapq.heappush(que, (0, 0)) # dist, start vertex
+
+# while cnt < V:
+#     (d, v2) = heapq.heappop(que)
+#     if not vi[v2]:
+#         vi[v2] = True
+#         dist += d
+#         cnt += 1
+
+#         for e in arr[v2]:
+#             if not vi[e[0]]:
+#                 heapq.heappush(que, [e[1], e[0]])
+
+# print(dist)
+
+
+import sys
+input = sys.stdin.readline
+sys.setrecursionlimit(10**6)
+
+V, E = map(int, input().split())
+edges = []
+set_list = [0] * (V + 1)
+result = 0
+
+for _ in range (E) :
+    a, b, cost = map(int, input().split())
+    edges.append((cost, a, b))
+edges.sort()
+
+for i in range (1, V + 1) :     #노드번호
+    set_list[i] = i
+    
+def find (parent, x) :
+    if parent[x] != x :
+        parent[x] = find(parent, parent[x])
+    return parent[x]
+
+def union (parent, x, y) :
+    x = find (parent, x)
+    y = find (parent, y)
+    if x > y :
+        parent[x] = y
+    else :
+        parent[y] = x
+        
+for edge in edges :
+    cost, a, b = edge
+    if find (set_list, a) != find (set_list, b) :
+        union (set_list, a, b)
+        result += cost
+print (result)
