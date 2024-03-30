@@ -1,7 +1,7 @@
 def find(self. value):
     for i in range(self.no):
         idx = (i + self.front) % self.capacity
-        if self.que[idx] = value:
+        if self.que[idx] == value:
             return idx
     return -1
 
