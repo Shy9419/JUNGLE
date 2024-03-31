@@ -46,11 +46,11 @@ for _ in range (E) :
 edges.sort()
 
 for i in range (1, V + 1) :     #노드번호
-    set_list[i] = i
+    set_list[i] = i     # '0'으로 채워진 set_list함수에 1부터 입력받을 Vertex의 수만큼 숫자로 채움
     
-def find (parent, x) :
-    if parent[x] != x :
-        parent[x] = find(parent, parent[x])
+def find (parent, x) :      # 배열 set_list를 parent로 가져옴. x = a 노드번호
+    if parent[x] != x :     # 만약 a노드에 부모값이 노드번호와 같지 않다면
+        parent[x] = find(parent, parent[x])     # set_list에서 같지 않은 값을 노드번호로 하는 
     return parent[x]
 
 def union (parent, x, y) :
