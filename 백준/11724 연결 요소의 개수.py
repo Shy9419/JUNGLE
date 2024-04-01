@@ -6,7 +6,7 @@ sys.setrecursionlimit(10**7)
 def dfs(v):
     visited[v] = True   # 값이 들어왔다는 건 방문했다는 거 트루로 바꿈
     for u in graph[v]:      # 현재 정점 'v' 와 연결된 모든 정점 'u'에 대해 반복해준다.
-        if not visited[u]:      # 정점 'u'를 방문하지 않았다면, 해당 정점에 대해 DFS를 재귀적으로 호출하여 연결된 모든 정점을 탐색한다.
+        if visited[u] == False:      # 정점 'u'를 방문하지 않았다면, 해당 정점에 대해 DFS를 재귀적으로 호출하여 연결된 모든 정점을 탐색한다.
             dfs(u)
 
 # 입력값 받기 , 2차원 배열 그래프 만들기, 1차원 배열 방문여부 그래프 만들기
@@ -23,7 +23,7 @@ for _ in range(M):
 # 연결 요소 개수 세기
 count = 0
 for i in range(1, N+1):
-    if not visited[i]:
+    if visited[i] == False:
         count += 1
         dfs(i)
 
