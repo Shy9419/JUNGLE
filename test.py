@@ -1,25 +1,37 @@
 import sys
-sys.setrecursionlimit(10**6)
-n = int(sys.stdin.readline())
+input = sys.stdin.readline
+k = int(input())
 
-graph = [[] for i in range(n+1)]
+is_valied = True
 
-for i in range(n-1):
-    a, b = map(int, sys.stdin.readline().split())
-    graph[a].append(b)
-    graph[b].append(a)
+def dfs(u):
+    global is_valied
+    visited[u] = True
+    for v in graph[u]:
+        if visited == False:
+            team[v] = (team[u]+1)%2
+            dfs(u)
+        elif team[u] == team[v]:
+            is_valied = False
+            
 
-visited = [0]*(n+1)
-
-arr = []
-
-def dfs(s):
-    for i in graph[s]:
-        if visited[i] == 0:
-            visited[i] = s
+for _ in range(k):
+    v, e = map(int, input().split())
+    graph = [[] for _ in range(v + 1)]
+    visited = [False] * (v + 1)
+    team = [0] * (v + 1)    # 팀 나누기
+    
+    for _ in range(v + 1):
+        a, b = map(int, input().split())
+        graph[a].append(b)
+        graph[b].append(a)
+    
+    for i in range(1, v + 1):
+        if is_valied:
             dfs(i)
-
-dfs(1)
-
-for x in range(2, n+1):
-    print(visited[x])
+        else:
+            break
+    if is_valied:
+        print("YES")
+    else:
+        print("NO")
