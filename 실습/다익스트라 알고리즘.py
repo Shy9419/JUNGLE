@@ -36,10 +36,10 @@ heap = [[0,K]]
 while heap:
     ew, ev = heapq.heappop(heap)    # ew = 지금 간선 값, ev = 지금 노드위치
     if dist[ev] != ew: continue     # 만약 두 값이 다르다면 이미 최단 거리가 업데이트 되었으므로 해당 노드를 다시 방문할 필요x
-    for nw, nv in edge[ev]:
+    for nw, nv in edge[ev]:     # 인접리스트에 값을 가지고 for문
         if dist[nv] > ew + nw:
             dist[nv] = ew + nw
-            heapq.heappush(heap, [dist[nv], nv])
+            heapq.heappush(heap, [dist[nv], nv])        # heap 리스트에 dist[nv], nv를 추가하는 거.
             
 for i in range(1, V + 1):
     if dist[i] == INF: print("INF")
@@ -114,3 +114,40 @@ def dijkstra (x) :
     print (edge_cost[1:])
 print (edge)
 dijkstra(K)
+
+
+n, m = map(int,input().split())
+k = int(input())
+INF = sys.maxsize
+
+graph = [[] for _ in range(n+1)]
+visited = [False] * (n+1)
+distance = [INF] * (n+1)
+
+for _ in range(m):
+    u, v, w = map(int, input().split())
+    graph[u].append((v,w))
+
+def get_smallest_node():
+    min_val = INF
+    index = 0
+    for i in range(1, n+1):
+        if distance[i] < min_val and not visited[i]:
+            min_val = distance[i]
+            index = i
+    return index
+
+def dijkstra(start):
+    distance[start] = 0 # 시작 노드는 0으로 초기화
+    visited[start] = True
+    
+    for i in graph[start]:
+        now = get_smallest_node()   # 거리가 구해진 노드 중 가장 짧은 거리인 것을 선ㅌ개
+        visited[now] = True     # 방문 처리
+        
+        for j in graph[now]:
+            if distance[now] + j[1] < distance[j[0]]:
+                distance[j[0]] = distance[now] + j[1]
+                
+dijkstra(k)
+print(distance)
