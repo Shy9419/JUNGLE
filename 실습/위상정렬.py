@@ -2,6 +2,9 @@ import sys
 from collections import deque
 input = sys.stdin.readline
 
+n = int(input())
+m = int(input())
+
 #진입차수
 indegree = [0] * (n+1)
 graph = [[] for _ in range(n+1)]

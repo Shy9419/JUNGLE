@@ -4,8 +4,8 @@ input = sys.stdin.readline
 INF = sys.maxsize
 
 # 입력 처리
-n = int(input())    # 도시의 개수
-m = int(input())    # 버스의 개수
+n, m = map(int, input().split())    # 도시의 개수
+
 
 # 그래프 초기화
 graph = [[] for _ in range(n+1)]
@@ -15,10 +15,10 @@ for _ in range(m):
     graph[a].append((b,c))
 start, end = map(int, input().split())
     
-def bfs(u):
+def bfs(u): # u = start
     # 간선의 가중치를 비교하기 위해서 무한대로 초기화한 리스트 만듦
     distance = [INF] * (n+1)
-    distance[u] = 0
+    distance[u] = 0     # 시작점은 0으로
     # 큐에 내용을 넣는다.
     q = deque([(u, 0)])
     # 큐에 내용이 다 빠질 때 까지 반복한다.

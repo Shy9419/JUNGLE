@@ -45,7 +45,8 @@ for _ in range (E) :
     edges.append((cost, a, b))
 edges.sort()
 
-for i in range (1, V + 1) :     #노드번호
+# 리스트에 부모 값들 초기화
+for i in range (1, V + 1):     #노드번호
     set_list[i] = i     # '0'으로 채워진 set_list함수에 1부터 입력받을 Vertex의 수만큼 숫자로 채움
     
 def find (parent, x) :      # 배열 set_list를 parent로 가져옴. x = a 노드번호
@@ -53,7 +54,7 @@ def find (parent, x) :      # 배열 set_list를 parent로 가져옴. x = a 노�
         parent[x] = find(parent, parent[x])     # set_list에서 같지 않은 값을 노드번호로 하는 
     return parent[x]
 
-def union (parent, x, y) :
+def union (parent, x, y):
     x = find (parent, x)
     y = find (parent, y)
     if x > y :
@@ -61,8 +62,8 @@ def union (parent, x, y) :
     else :
         parent[y] = x
         
-for edge in edges :
-    cost, a, b = edge
+for u in graph:
+    cost, a, b = u
     if find (set_list, a) != find (set_list, b) :
         union (set_list, a, b)
         result += cost
