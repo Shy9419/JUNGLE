@@ -8,7 +8,7 @@ def bfs(graph, start, visited):
     visited[start] = True
     # 큐가 빌 때까지 반복
     while queue:
-        # 큐에서 하나의 우너소를 뽑아 출력하기
+        # 큐에서 하나의 원소를 뽑아 출력하기
         v = queue.popleft()
         # 아직 방문하지 않은 인접한 원소들을 큐에 삽입
         for i in graph[v]:
